@@ -1,29 +1,34 @@
 package ru.lipatkin.playground.spring.boot.graphql.resolvers;
 
 import com.coxautodev.graphql.tools.GraphQLQueryResolver;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import ru.lipatkin.playground.spring.boot.graphql.model.Author;
 import ru.lipatkin.playground.spring.boot.graphql.model.Book;
+import ru.lipatkin.playground.spring.boot.graphql.storage.SimpleDataStorage;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Component
 public class Query implements GraphQLQueryResolver {
 
+    @Autowired
+    private SimpleDataStorage dataStorage;
+
     public List<Book> books() {
-        return new ArrayList<>();
+        return dataStorage.getAllBooks();
     }
 
-    public Book book(Integer id) {
-        return null;
+    public Optional<Book> book(Integer id) {
+        return dataStorage.getAllBooks().stream().filter(it -> it.getId() == id).findFirst();
     }
 
     public List<Author> authors() {
-        return new ArrayList<>();
+        return dataStorage.getAllAuthors();
     }
 
-    public Author author(Integer id) {
-        return null;
+    public Optional<Author> author(Integer id) {
+        return dataStorage.getAllAuthors().stream().filter(it -> it.getId() == id).findFirst();
     }
 }
