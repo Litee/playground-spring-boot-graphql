@@ -11,16 +11,15 @@ import java.util.List;
 @Repository
 public class SimpleDataStorage {
     private List<Book> books = new ArrayList<>();
-    private List<Author> authors = new ArrayList<>();
 
     public SimpleDataStorage() {
         Author author1 = new Author(0, "Isaak Asimov");
         Author author2 = new Author(1, "Robert Heinlein");
 
         Book book1 = new Book(0, "Foundation");
-        Book book2 = new Book(1, "I, robot");
-        Book book3 = new Book(2, "Star Troopers");
-        Book book4 = new Book(3, "Double star");
+        Book book2 = new Book(1, "I, Robot");
+        Book book3 = new Book(2, "Starship Troopers");
+        Book book4 = new Book(3, "The Moon Is a Harsh Mistress");
 
         author1.getBooks().add(book1);
         author1.getBooks().add(book2);
@@ -33,14 +32,9 @@ public class SimpleDataStorage {
         book4.getAuthors().add(author2);
 
         books.addAll(Arrays.asList(book1, book2, book3, book4));
-        authors.addAll(Arrays.asList(author1, author2));
     }
 
     public List<Book> getAllBooks() {
         return new ArrayList<>(books);
-    }
-
-    public List<Author> getAllAuthors() {
-        return new ArrayList<>(authors);
     }
 }

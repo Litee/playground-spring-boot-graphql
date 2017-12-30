@@ -20,7 +20,7 @@ public class QueryTest extends GraphqlTestBase {
         ResponseEntity<String> responseEntity = postGraphql("{books{id, title}}", "{}");
 
         assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
-        JSONAssert.assertEquals("{\"data\":{\"books\":[{\"id\":0,\"title\":\"Foundation\"},{\"id\":1,\"title\":\"I, robot\"},{\"id\":2,\"title\":\"Star Troopers\"},{\"id\":3,\"title\":\"Double star\"}]}}", responseEntity.getBody(), false);
+        JSONAssert.assertEquals("{\"data\":{\"books\":[{\"id\":0,\"title\":\"Foundation\"},{\"id\":1,\"title\":\"I, Robot\"},{\"id\":2,\"title\":\"Starship Troopers\"},{\"id\":3,\"title\":\"The Moon Is a Harsh Mistress\"}]}}", responseEntity.getBody(), false);
     }
 
     @Test
@@ -29,7 +29,7 @@ public class QueryTest extends GraphqlTestBase {
         ResponseEntity<String> responseEntity = postGraphql("{book(id:1){id, title}}", "{}");
 
         assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
-        JSONAssert.assertEquals("{\"data\":{\"book\":{\"id\":1,\"title\":\"I, robot\"}}}", responseEntity.getBody(), false);
+        JSONAssert.assertEquals("{\"data\":{\"book\":{\"id\":1,\"title\":\"I, Robot\"}}}", responseEntity.getBody(), false);
     }
 
 }

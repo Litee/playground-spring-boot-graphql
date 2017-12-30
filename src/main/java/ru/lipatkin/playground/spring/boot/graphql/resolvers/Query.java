@@ -24,13 +24,5 @@ public class Query implements GraphQLQueryResolver {
     public Optional<Book> book(Integer id) {
         return dataStorage.getAllBooks().stream().filter(it -> it.getId() == id).findFirst();
     }
-
-    public List<Author> authors() {
-        return dataStorage.getAllAuthors();
-    }
-
-    public Optional<Author> author(Integer id) {
-        return dataStorage.getAllAuthors().stream().filter(it -> it.getId() == id).findFirst();
-    }
 }
 
