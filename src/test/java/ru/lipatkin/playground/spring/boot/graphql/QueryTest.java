@@ -3,6 +3,7 @@ package ru.lipatkin.playground.spring.boot.graphql;
 import lombok.SneakyThrows;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.skyscreamer.jsonassert.JSONAssert;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
@@ -20,15 +21,15 @@ public class QueryTest {
 
     @Test
     @SneakyThrows
-    public void testPost() {
+    public void testLoadingBooks() {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
-        HttpEntity<String> entity = new HttpEntity<>("{\"query\":\"{books{id}}\"}", headers);
+        HttpEntity<String> entity = new HttpEntity<>("{\"query\":\"{books{id, title}}\"}", headers);
 
         ResponseEntity<String> responseEntity = restTemplate.postForEntity("/graphql", entity, String.class);
 
         assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
-        assertEquals("{\"data\":{\"books\":[{\"id\":0},{\"id\":1},{\"id\":2},{\"id\":3}]}}", responseEntity.getBody());
+        JSONAssert.assertEquals("{\"data\":{\"books\":[{\"id\":0,\"title\":\"Foundation\"},{\"id\":1,\"title\":\"I, robot\"},{\"id\":2,\"title\":\"Star Troopers\"},{\"id\":3,\"title\":\"Double star\"}]}}", responseEntity.getBody(), false);
     }
 
 }
