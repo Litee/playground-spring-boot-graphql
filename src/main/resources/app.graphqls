@@ -5,6 +5,10 @@ type Query {
     author(id: Int!): Author
 }
 
+type Mutation {
+    changeBookTitle(id: Int!, newTitle: String!): Book
+}
+
 # Books in my library
 type Book {
     id: Int!

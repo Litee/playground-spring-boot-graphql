@@ -1,5 +1,6 @@
 package ru.lipatkin.playground.spring.boot.graphql.resolvers;
 
+import com.coxautodev.graphql.tools.GraphQLMutationResolver;
 import com.coxautodev.graphql.tools.GraphQLQueryResolver;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -32,3 +33,4 @@ public class Query implements GraphQLQueryResolver {
         return dataStorage.getAllAuthors().stream().filter(it -> it.getId() == id).findFirst();
     }
 }
+
